@@ -58,6 +58,10 @@ uint32_t  freq;            // frequency in kHz  <-- float takes 1.5 kB memory ex
 
 int16_t  shifts[] = {0,-6000,-28000}; // common repeater shifts in kHz in Europe, 0 = no shift (simplex)
 
+//values here in stead of in the subroutine to keep the values.
+//else the values are set to 0 when leaving the routine.
+int8_t   level,maxlevel,dlay;       // level max memory, delay & speed for peak return
+uint32_t lastT=0;
 
 uint8_t  sig_level;     // relative signal strength
 uint8_t  squelch_level; // squelch level (0 - 9)
@@ -675,9 +679,6 @@ void init_Timer1() { // deliberately chosen NOT to include TimerOne.h to have sh
 }
 
 void displayS() {                   // display relative S-signalbar in the lower row during RX
-
-int8_t   level,maxlevel,dlay;       // level max memory, delay & speed for peak return
-uint32_t lastT=0;
 
 byte  fill[]={0x20,0x00,0x01,0x02,0x03,0xff};      // character used for fill 
 byte  peak[]={0x20,0x00,0x04,0x05,0x06,0x07,0x20}; // character used for peak 
